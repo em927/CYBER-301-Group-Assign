@@ -2,7 +2,7 @@
 import re  # Package ftor using regular expressions
 
 # Emma Buckner wrote the getusername()
-def getusername_passwd() -> tuple:  # This function is used to get login information from the user check if it is valid
+def getusername_passwd():  # This function is used to get login information from the user check if it is valid
     # Variables used to user login information
     username = ""
     password = ""
@@ -13,8 +13,7 @@ def getusername_passwd() -> tuple:  # This function is used to get login informa
     while i == False:
         username = input("Enter your username or email address: ")
         username_validation = "@" and "." in username
-        print(
-            "User passwords must contain at least: \n* eight characters \n* one uppercase letter \n* one lowercase letter \n* one number \n* one special character")
+        print("User passwords must contain at least: \n* eight characters \n* one uppercase letter \n* one lowercase letter \n* one number \n* one special character")
         password = input("Enter your password: ")
         password_para = re.search(r"(?=.+[\w])(?=.+[!@#$%^&*?_])[\w!@#$%^&*?_]{8,35}", password)
         if password_para != None and len(password) > 7:
@@ -25,13 +24,12 @@ def getusername_passwd() -> tuple:  # This function is used to get login informa
             i = True
             return username, password
         else:
-            print(
-                "The username and password you have enter do not follow the listed requirements. You will be prompted to reenter each.")
+            print("The username and password you have enter do not follow the listed requirements. You will be prompted to re-enter each.")
 
 
 def main():
-    vusername, vpassword = getusername_passwd() #retunes and stores values from getusername_passwd()
-    #if else statments to verify that the username and password have been stored and call secure_store()
+    vusername, vpassword = getusername_passwd() # Retunes and stores values from getusername_passwd()
+    # If else statments to verify that the username and password have been stored and call secure_store()
 
-#invoke main()
+# Invoke main()
 main()
