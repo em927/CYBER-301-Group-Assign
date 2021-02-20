@@ -28,7 +28,7 @@ def getusername_passwd():  # This function is used to get login information from
 
 
 def main():
-    vusername, vpassword = getusername_passwd() # Retunes and stores values from getusername_passwd()
+    vusername, vpassword = getusername_passwd() # Returns and stores values from getusername_passwd()
     # If else statments to verify that the username and password have been stored and call secure_store()
 
 # Invoke main()
