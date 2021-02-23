@@ -1,6 +1,25 @@
 # This code is for assignment 2 of CYBR 301 written by Emma Buckner and Kunj Champaneri
 import re  # Package ftor using regular expressions
 
+'''
+#Notes from Instructor:
+Hey Team, I recommend following changes in your getusername_passwd() function
+1. separate the logic(s) to validate username and password; that you can write a function
+to validate a username, and another function to validate the password.
+2. Here, use of regular expression is correct. Just try to simplify when to continue looping for invalid password.
+ex.
+i=True
+password=input(..)
+while i==False:
+if re.search(regex,password):
+   i=True
+else:
+    password=input(..)
+    
+
+The point here is simplify your logic by separating logics to validate username and password. That way, it becomes easy
+to test the function..
+'''
 # Emma Buckner wrote the getusername()
 def getusername_passwd():  # This function is used to get login information from the user check if it is valid
     # Variables used to user login information
