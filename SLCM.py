@@ -59,12 +59,12 @@ def getusername_passwd():
             password_validation = False
             print("The password entered is invalid. Enter a valid password.")
 
-        # Checks that the username and password are valid before returning to main()
-        if username_validation == True and password_validation == True:
-            return username, password
-        # If one or both are invalid then the loop iterates and the user must enter a valid username and password
-        else:
-            return None, None
+     # Checks that the username and password are valid before returning to main()
+     if username_validation == True and password_validation == True:
+         return username, password
+     # If one or both are invalid then the loop iterates and the user must enter a valid username and password
+     else:
+         return None, None
 
 
 def main():
