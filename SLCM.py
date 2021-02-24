@@ -42,6 +42,7 @@ def getusername_passwd():
         else:
             print("The username you have entered is invalid. Enter a valid username or email address:")
 
+    i = False  # Resets i to false for the loop to iterate
     while i == False:
         # Asks user to enter password and checks if it meets all the printed parameters
         print("User passwords must contain at least:")
@@ -49,10 +50,10 @@ def getusername_passwd():
         password = input("Enter your password: ")
 
         # checks if the password requirements are met
-        password_regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]){8,}$"
+        password_regex = r"(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_])"
         match_regex = re.compile(password_regex)
         password_para = re.search(match_regex, password)
-        if password_para != None:
+        if password_para != None and len(password) > 7:
             password_validation = True
             i = True
         else:
