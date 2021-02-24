@@ -1,5 +1,5 @@
 # This code is for assignment 2 of CYBR 301 written by Emma Buckner and Kunj Champaneri
-import re  # Package ftor using regular expressions
+import re  # Package for using regular expressions
 
 '''
 #Notes from Instructor:
@@ -20,35 +20,57 @@ else:
 The point here is simplify your logic by separating logics to validate username and password. That way, it becomes easy
 to test the function..
 '''
-# Emma Buckner wrote the getusername()
-def getusername_passwd():  # This function is used to get login information from the user check if it is valid
-    # Variables used to user login information
+
+
+# Emma Buckner wrote the getusername_passwd()
+def getusername_passwd():
+    # Variables used to user get login information and validate it
     username = ""
     password = ""
     i = False  # Boolean variable uses to fire the while loop until the user enters valid login information
     username_validation = False  # username_validation stores if the entered username is valid
     password_para = ""  # Stores the match object of the re
-    password_validation = False
+    password_validation = False  # Stores if the entered password is valid
+
     while i == False:
-        username = input("Enter your username or email address: ")
+        # Asks user to enter username and checks that it is a valid email address
+        username = input("Enter a username or email address: ")
         username_validation = "@" and "." in username
-        print("User passwords must contain at least: \n* eight characters \n* one uppercase letter \n* one lowercase letter \n* one number \n* one special character")
+        if username_validation:
+            i = True
+            print("You have entered a valid username.")
+        else:
+            print("The username you have entered is invalid. Enter a valid username or email address:")
+
+    while i == False:
+        # Asks user to enter password and checks if it meets all the printed parameters
+        print("User passwords must contain at least:")
+        print("* 8 characters \n* 1 uppercase letter \n* 1 lowercase letter \n* 1 number \n* 1 special character")
         password = input("Enter your password: ")
-        password_para = re.search(r"(?=.+[\w])(?=.+[!@#$%^&*?_])[\w!@#$%^&*?_]{8,35}", password)
-        if password_para != None and len(password) > 7:
+
+        # checks if the password requirements are met
+        password_regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]){8,}$"
+        match_regex = re.compile(password_regex)
+        password_para = re.search(match_regex, password)
+        if password_para != None:
             password_validation = True
+            i = True
         else:
             password_validation = False
+            print("The password entered is invalid. Enter a valid password.")
+
+        # Checks that the username and password are valid before returning to main()
         if username_validation == True and password_validation == True:
-            i = True
             return username, password
+        # If one or both are invalid then the loop iterates and the user must enter a valid username and password
         else:
-            print("The username and password you have enter do not follow the listed requirements. You will be prompted to re-enter each.")
+            return None, None
 
 
 def main():
-    vusername, vpassword = getusername_passwd() # Returns and stores values from getusername_passwd()
-    # If else statments to verify that the username and password have been stored and call secure_store()
+    vusername, vpassword = getusername_passwd()  # Returns and stores values from getusername_passwd()
+    # If else statements to verify that the username and password have been stored and call secure_store()
+
 
 # Invoke main()
 main()
