@@ -1,5 +1,7 @@
 # This code is for assignment 2 of CYBR 301 written by Emma Buckner and Kunj Champaneri
 import re  # Package for using regular expressions
+from Crypto.Cipher import AES
+from secrets import token_bytes
 
 '''
 #Notes from Instructor:
@@ -66,11 +68,25 @@ def getusername_passwd():
      # If one or both are invalid then the loop iterates and the user must enter a valid username and password
      else:
          return None, None
+      
+      
+#secure_store() function is written by Kunj Champaneri
 
+def secure_store(username, password): #The secure_store function
+    key = token_bytes(16) #Assigning the key
+    cipher = AES.new(key, AES.MODE_EAX) #Assigning the cipher
+    nonce = cipher.nonce
+    ciphertext, tag = cipher.encrypt_and_digest(username.encode('ascii')) #Encrypting the username 
+    ciphertext1, tag = cipher.encrypt_and_digest(password.encode('ascii')) #Encrypting the password 
+    
+    file = open("credential.dat", "w") #Opening the file
+    file.write(username) #Writing to the file
+    file.write(password) #Writing to the file 
 
 def main():
     vusername, vpassword = getusername_passwd()  # Returns and stores values from getusername_passwd()
     # If else statements to verify that the username and password have been stored and call secure_store()
+   secure_store(username, password) #Calling the function 
 
 
 # Invoke main()
