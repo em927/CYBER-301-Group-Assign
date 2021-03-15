@@ -43,7 +43,7 @@ def verify_hashed_passwd(username, passwd):
     #stores file
     infile = "hlogins.dat"
 
-    # open the file to read
+    #opens the file to read
     fd = open(infile, mode='r')
 
     # used to read file
@@ -60,7 +60,8 @@ def verify_hashed_passwd(username, passwd):
         else:
             print('Authentication unsuccessful')
             return False
-       
+        
+   #closes file    
    fd.close()   
   
 #main()
