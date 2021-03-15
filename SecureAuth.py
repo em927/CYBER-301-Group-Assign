@@ -3,9 +3,11 @@ Author: Naresh Adhikari, Sru
 This is a skeletal program that students need to implement the declared
 and defined functions under @TODO annotation, according to the logic/functional requirements stated in assigment-2.pdf.
 
-Students are not expected to midify main() function.
+Students are not expected to modify main().
 '''
+
 import hashlib
+import csv
 def secure_hashed_passwd(username, passwd):
     import hashlib, uuid
     import os
@@ -28,26 +30,40 @@ def secure_hashed_passwd(username, passwd):
 
     #return salt,pepper,saltpepperdigest
 
-
+# verify_hashed_passwd() is written by Emma Buckner
 def verify_hashed_passwd(username, passwd):
     '''
     @TODO: Students are required to implement this function.
-
     Server side verifies login credentials username and password
-    :param username:
-    :param hpasswd:
-    :return:
+    :param username: used to look for a match in hlogins.dat
+    :param passwd: user passwd in plaintext
+    :return: if username is found in hlogin.dat then checks the hashed password with tempo_hash and returns either true
+    or false, otherwise verify_hashed_passwd() returns false
     '''
-    #databse file with username and hashed-password.
-    infile="hlogins.dat"
-    #open the file to read
-    fd=open(infile,"r")
-    #read the infile line by line to retrive a matching row with first field value of username
+    #stores file
+    infile = "hlogins.dat"
 
-    #To read the file line by line, use a for loop.
-    #Hint: split each line by a comma "," to get list of username, salt, pepper, and stored_hashpassword values.
-    #implement other logics inside loop.
+    # open the file to read
+    fd = open(infile, mode='r')
 
+    # used to read file
+    for file_line in csv.reader(fd):
+        for i in file_line: #stores entries in list
+            if username in file_line: #searches list for username
+                tempo_hash = hashlib.sha3_224(passwd) #makes temp hash of passwd
+                if tempo_hash in file_line: #compares actual hash in file to temp hash
+                    print('Authentication successful')
+                    return True
+                else:
+                    print('Authentication unsuccessful')
+                    return False
+        else:
+            print('Authentication unsuccessful')
+            return False
+       
+   fd.close()   
+  
+#main()
 def main():
     '''Do not modify this function.'''
 
