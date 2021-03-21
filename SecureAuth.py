@@ -60,7 +60,7 @@ def secure_hashed_passwd(username, passwd):
 
     #return salt,pepper,saltpepperdigest
 
-# verify_hashed_passwd() is written by Emma Buckner
+# verify_hashed_passwd() was written by Emma Buckner
 def verify_hashed_passwd(username, passwd):
     '''
     @TODO: Students are required to implement this function.
@@ -70,18 +70,22 @@ def verify_hashed_passwd(username, passwd):
     :return: if username is found in hlogin.dat then checks the hashed password with tempo_hash and returns either true
     or false, otherwise verify_hashed_passwd() returns false
     '''
-    #stores file
+
+    # databse file with username and hashed-password.
     infile = "hlogins.dat"
 
-    #opens the file to read
-    fd = open(infile, mode='r')
+    # Attempts to open file and read contents
+    try:
+        fd = open(infile, mode="r")
+    except Exception as e:
+        print("Infile was not opened:", str(e))
+        exit()
 
-    # used to read file
     for file_line in csv.reader(fd):
-        for i in file_line: #stores entries in list
-            if username in file_line: #searches list for username
-                tempo_hash = hashlib.sha3_224(passwd) #makes temp hash of passwd
-                if tempo_hash in file_line: #compares actual hash in file to temp hash
+        for i in file_line:
+            if username in file_line:
+                tempo_hash = hashlib.sha3_224(passwd)
+                if tempo_hash in file_line:
                     print('Authentication successful')
                     return True
                 else:
@@ -90,10 +94,10 @@ def verify_hashed_passwd(username, passwd):
         else:
             print('Authentication unsuccessful')
             return False
-        
-   #closes file    
-   fd.close()   
-  
+    
+    #Closes file
+    fd.close()
+
 #main()
 def main():
     '''Do not modify this function.'''
